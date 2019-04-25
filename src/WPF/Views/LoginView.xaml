@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="TouchTest.WPF.Views.LoginView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:w="clr-namespace:TouchTest.WPF.Helpers"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      FlowDirection="RightToLeft">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="ErrorMsg" FontSize="14" Foreground="Red" Visibility="{Binding IsErrorMsgVisible}" Margin="5" MaxWidth="260" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel x:Name="TextBoxFirstPanel" Orientation="Horizontal" Margin="5">
+                <materialDesign:PackIcon Margin="5" Height="24" Width="24" Foreground="{Binding ElementName=UserNameTextBox, Path=BorderBrush}" Kind="account" />
+                <TextBox x:Name="UserNameTextBox" Text="{Binding UserName,ValidatesOnExceptions=True,ValidatesOnDataErrors=True}" Style="{DynamicResource MaterialDesignTextBox}" MinWidth="200" Margin="5" BorderThickness="0,0,0,1" materialDesign:HintAssist.Hint="اسم المستخدم"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="{Binding ElementName=TextBoxFirstPanel, Path=Margin}">
+                <materialDesign:PackIcon Margin="5" Height="24" Width="24" Foreground="{Binding ElementName=PasswordTextBox, Path=BorderBrush}" Kind="keyvariant" />
+                <PasswordBox x:Name="PasswordTextBox" w:PasswordHelper.Attach="True" w:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" Style="{DynamicResource MaterialDesignPasswordBox}"  MinWidth="{Binding MinWidth, ElementName=UserNameTextBox}" Margin="{Binding Margin, ElementName=UserNameTextBox}" materialDesign:HintAssist.Hint="كلمة المرور"/>
+            </StackPanel>
+            <Grid MaxWidth="300" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Login" Grid.Column="1" materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsLogging}" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="دخول" Style="{DynamicResource MaterialDesignRaisedAccentButton}" IsDefault="True" Margin="5" MaxWidth="100" MaxHeight="50"/>
+                <Button x:Name="Register" Content="تسجيل" Style="{DynamicResource MaterialDesignRaisedButton}" Margin="5" MaxWidth="100" MaxHeight="50"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
